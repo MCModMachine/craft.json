@@ -38,9 +38,9 @@ A project is the core unit of
   project, not including dependencies.
 * `dependencies`: **array of Depencencies** the projects that must be installed
   for this project to function properly.
-* `minecraftVersion`: **string** the Minecraft version this project is
-  compatible with. Should always be in x.y.z format, even when Mojang omits the
-  patch number.
+* `minecraftVersion`: **array of strings** the Minecraft versions this project is
+  compatible with. Values should be the identifier Mojang uses for the version,
+  without the "release" or "snapshot" prefix.
 * `compatibility`: **object** this version of the project's compatibility with
   previous versions
   * `api`: **object** this version's API compatibility with the previous version
