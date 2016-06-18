@@ -15,10 +15,14 @@ Project
 
 A project is the core unit of 
 
+* `specVersion`: **number** always 1. Parsers must not attempt to parse files
+  with other values for `specVersion`. This field is reserved for future use.
 * `identifier`: **string** a unique alphanumeric (+ pipes) string representing
   the project. For mods, this should generally be the same as the Forge modid.
   <sup>1</sup> 
 * `name`: **string** a human-readable name for the mod. This need not be unique.
+* `description`: **string** a human-readable description of what a mod does.
+* `website`: **string** a URL for a website about the mod.
 * `type`: **string** the type of project. This may be:
   * `mod`: a individual mod. A `mod` should be exactly one JAR file.
   * `modpack`: a set of mods that can be played. Every instance has a 1-to-1
@@ -63,6 +67,11 @@ A project is the core unit of
       <sup>3</sup>
 * `doNotInclude`: **array of Uninclusions** list of projects that should not be
   included alongside this project.
+* `license`: **object** a summary of the project's license. This should always
+  reflect the actual legal license applied to the project.
+  * `modpack`: **boolean/string** permissions granted by the license regarding
+    inclusion in publically-released modpacks. May be `false` (do not allow), 
+    `"permission"` (allow with prior permission), or `true` (allow).
 
 File
 ====
