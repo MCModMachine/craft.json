@@ -8,7 +8,7 @@ the canonical representation, in practice this will just be used as a structure
 instead of an actual JSON syntax in many situations. For example, pack devs
 and modders will likely use a GUI that internally uses this format, and on the
 server this data will likely be stored in an SQL database instead of in JSON
-files. However, this spec still dictates the 
+files. However, this spec still dictates the relevant data structures.
 
 Project
 =======
@@ -24,6 +24,8 @@ A project is the core unit of
 * `description`: **string** a human-readable description of what a mod does.
 * `website`: **string** a URL for a website about the mod.
 * `type`: **string** the type of project. This may be:
+  * `game`: the moddable game, presumably Minecraft. There is no reason this spec
+    could not be repurposed for another game, however.<sup>4</sup>
   * `mod`: a individual mod. A `mod` should be exactly one JAR file.
   * `modpack`: a set of mods that can be played. Every instance has a 1-to-1
     mapping to a modpack. (Custom instances are just locally saved modpacks;
@@ -39,12 +41,9 @@ A project is the core unit of
   version was based off of, not release time. For example, version 5.3's
   `previousVersion` is 5.2, even if 5.3 is released after 6.0.
 * `files`: **array of Files** the files that must be installed as part of this
-  project, not including dependencies.
+  project, not including dependencies. Not required for `game` projects.
 * `dependencies`: **array of Depencencies** the projects that must be installed
   for this project to function properly.
-* `minecraftVersion`: **array of strings** the Minecraft versions this project is
-  compatible with. Values should be the identifier Mojang uses for the version,
-  without the "release" or "snapshot" prefix.
 * `compatibility`: **object** this version of the project's compatibility with
   previous versions
   * `api`: **object** this version's API compatibility with the previous version
@@ -95,6 +94,7 @@ process of installing a project.
     a single local repository and tells Forge to include the mod via a command
     line argument. In cases where this is not supported, this is identical to
     `copy` with a path of `mods/{identifier}-{version}.jar`
+  * `launchWrapper`: the file should be loaded into Minecraft with LaunchWrapper.
 * `download`: **array of DownloadMethods** a list of methods by which the file
   may be downloaded. Note that this property may be set by the registry instead
   of in the original `craft.json` file provided by the modder. Clients should
@@ -220,3 +220,8 @@ Notes
 3. Although these would be more simply phrased in the positive, they are phrased
    like this for consistency with the other flags where `true` indicates
    compatibility.
+4. Your mod should only depend on the `minecraft` package if you are directly modifying
+   the game (for example, if you are writing a non-Forge mod or a Forge mod that uses ASM).
+   Other mods should simply depend on the relevant Forge version, so that their mods can still
+   function if a new Minecraft version is released with no major changes.
+   
