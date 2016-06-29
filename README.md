@@ -71,6 +71,9 @@ A project is the core unit of
   * `modpack`: **boolean/string** permissions granted by the license regarding
     inclusion in publically-released modpacks. May be `false` (do not allow), 
     `"permission"` (allow with prior permission), or `true` (allow).
+* `side`: **string** the types of Minecraft instances where this project needs to
+  be installed. May be `client`, `server`, or `both`. All project types default to
+  `both`, except for `resourcePack` which defaults to `client`.
 
 File
 ====
