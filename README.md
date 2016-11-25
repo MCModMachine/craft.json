@@ -139,7 +139,7 @@ A description of a project's requirements about the presence of another project.
 * `compatibility`: **array of strings** the requirements this project has about
   the included version of the other project. This array may include:
   * `api`: the included version must have the same API as the specified version.
-  * `noFeatures`: the included version must not have the same user-facing
+  * `noFeatures`: the included version must have the same user-facing
     features as the specified version. Includes `noRework`.
   * `noRework`: the included version must not have had a major rebalance or
     rework since the specified version.
